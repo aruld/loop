@@ -18,5 +18,9 @@ rem Failed to launch ...
 rem Get parameters string
 set PARAMS=%*
 
+set LOOP_LIB_DIR=%LOOP_HOME%\lib
+set CLASSPATH="%LOOP_HOME%\loop.jar"
 
-java -classpath %LOOP_HOME%\loop.jar;lib\* loop.Loop %PARAMS%
+FOR %%j in (%LOOP_LIB_DIR%\*.jar) do call :CAPPEND "%%j"
+
+java -classpath %CLASSPATH% loop.Loop %PARAMS%

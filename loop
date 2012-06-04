@@ -21,5 +21,11 @@ if [ -n "${LOOP_HOME-x}" ]; then
   fi
 fi
 
-java -classpath "$LOOP_HOME/loop.jar:./lib/*" loop.Loop $*
+CLASSPATH=$LOOP_HOME/loop.jar
+LOOP_LIB_DIR=$LOOP_HOME/lib
+for jar in $LOOP_LIB_DIR/*.jar
+do
+  CLASSPATH=$CLASSPATH:$jar
+done
 
+java -classpath $CLASSPATH loop.Loop $*
